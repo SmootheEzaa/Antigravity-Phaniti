@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 const headerOffset = 80;
@@ -91,3 +91,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+/* ====================
+   Visual Effects Logic
+   ==================== */
+
+// 1. Custom Glowing Cursor
+const cursor = document.createElement('div');
+cursor.classList.add('cursor-glow');
+document.body.appendChild(cursor);
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+
+
+
+// 3. Floating Particles
+const particleContainer = document.createElement('div');
+particleContainer.classList.add('particle-container');
+document.body.appendChild(particleContainer);
+
+// Create 5 particles with random properties
+for (let i = 0; i < 5; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    // Random size
+    const size = Math.random() * 10 + 5; // 5px - 15px
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    // Random position
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+
+    // Random animation delay & duration
+    particle.style.animationDelay = `${Math.random() * 5}s`;
+    particle.style.animationDuration = `${Math.random() * 10 + 15}s`; // 15-25s
+
+    // Random Color (Blue/Violet/Cyan)
+    const colors = ['rgba(59, 130, 246, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(6, 182, 212, 0.4)'];
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    particleContainer.appendChild(particle);
+}
+
