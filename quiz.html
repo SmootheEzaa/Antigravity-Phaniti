@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Knowledge Check | AI Gen-Z</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .option-btn.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            color: #4ade80;
+        }
+
+        .option-btn.wrong {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #f87171;
+        }
+
+        .quiz-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1rem;
+        }
+
+        .score-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--highlight-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .result-screen {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .result-score {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-robot"></i>
+                    AI <span>Gen-Z</span>
+                </a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="what_is_ai.html">What is AI</a></li>
+                    <li><a href="prompt.html">Prompt Engineering</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Quiz Section -->
+    <section class="hero" style="min-height: 100vh; display: flex; align-items: center;">
+        <div class="bg-gradient-mesh"
+            style="top: 50%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);">
+        </div>
+
+        <div class="container" style="width: 100%;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span class="hero-tag">Final Assessment</span>
+                <h1>AI Master <span class="text-gradient">Challenge</span></h1>
+            </div>
+
+            <div class="quiz-container" id="quiz-box">
+                <!-- Question will be injected here -->
+                <div id="question-area">
+                    <div class="question-text" id="question-text">Loading...</div>
+                    <div class="options-grid" id="options-area"></div>
+                </div>
+
+                <!-- Result Screen -->
+                <div id="result-area" class="hidden result-screen">
+                    <h2>Quiz Completed!</h2>
+                    <p>คะแนนของคุณคือ</p>
+                    <div class="result-score" id="final-score">0/10</div>
+                    <p id="feedback-msg">ยอดเยี่ยมมาก!</p>
+                    <button class="btn btn-primary" onclick="restartQuiz()" style="margin-top: 2rem;">
+                        <i class="fa-solid fa-rotate-right"></i> ทำแบบทดสอบอีกครั้ง
+                    </button>
+                </div>
+
+                <div class="quiz-footer" id="quiz-footer">
+                    <span>Question <span id="current-q">1</span>/10</span>
+                    <span class="score-display">Score: <span id="score">0</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>© 2024 Next-Gen AI for Future Leaders. เตรียมพร้อมเด็กไทยสู่ยุคดิจิทัล</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                q: "1. AI (Artificial Intelligence) คืออะไร?",
+                options: [
+                    "A. หุ่นยนต์ที่มีอารมณ์เหมือนมนุษย์",
+                    "B. โปรแกรมคอมพิวเตอร์ที่เลียนแบบความฉลาดของมนุษย์ เรียนรู้และตัดสินใจได้",
+                    "C. เครื่องมือซ่อมคอมพิวเตอร์",
+                    "D. เว็บไซต์สำหรับดูหนังออนไลน์"
+                ],
+                correct: 1 // Index 1 = B
+            },
+            {
+                q: "2. Machine Learning (ML) แตกต่างจากโปรแกรมทั่วไปอย่างไร?",
+                options: [
+                    "A. ต้องเขียนคำสั่ง if-else ทุกกรณี",
+                    "B. ทำงานได้เฉพาะตอนมีอินเทอร์เน็ต",
+                    "C. เรียนรู้จากข้อมูลตัวอย่าง เพื่อหาคำตอบเองได้",
+                    "D. ราคาแพงกว่าเสมอ"
+                ],
+                correct: 2
+            },
+            {
+                q: "3. ข้อใดคือตัวอย่างของ Generative AI?",
+                options: [
+                    "A. Microsoft Excel",
+                    "B. Google Maps",
+                    "C. เครื่องคิดเลข",
+                    "D. ChatGPT"
+                ],
+                correct: 3
+            },
+            {
+                q: "4. เมื่อ AI ให้ข้อมูลที่ไม่จริง หรือมั่วขึ้นมาเอง เราเรียกว่าอะไร?",
+                options: [
+                    "A. Imagination",
+                    "B. Hallucination",
+                    "C. Creation",
+                    "D. Innovation"
+                ],
+                correct: 1
+            },
+            {
+                q: "5. การสั่งงาน AI ให้สวมบทบาทเป็นบุคคลอื่น (เช่น 'Act as a teacher') คือเทคนิคใด?",
+                options: [
+                    "A. Persona",
+                    "B. Chain of Thought",
+                    "C. Zero-shot",
+                    "D. Format"
+                ],
+                correct: 0
+            },
+            {
+                q: "6. Deep Learning คืออะไร?",
+                options: [
+                    "A. การเรียนดำน้ำลึก",
+                    "B. ML ขั้นสูงที่ทำงานเลียนแบบโครงข่ายประสาทสมองมนุษย์",
+                    "C. การอ่านหนังสืออย่างตั้งใจ",
+                    "D. โปรแกรมเล่นเกม"
+                ],
+                correct: 1
+            },
+            {
+                q: "7. เทคนิค 'Chain of Thought' ช่วยเรื่องอะไร?",
+                options: [
+                    "A. ช่วยให้ AI ประหยัดพลังงาน",
+                    "B. ช่วยให้ AI วาดรูปสวยขึ้น",
+                    "C. ช่วยลดความผิดพลาด โดยให้ AI คิดทีละขั้นตอน",
+                    "D. ช่วยให้ดาวน์โหลดข้อมูลเร็วขึ้น"
+                ],
+                correct: 2
+            },
+            {
+                q: "8. Deepfake คืออะไร และมีความเสี่ยงอย่างไร?",
+                options: [
+                    "A. วิดีโอปลอมที่สร้างโดย AI อาจทำให้คนเข้าใจผิดได้",
+                    "B. โปรแกรมแต่งรูปให้หน้าใส",
+                    "C. เกมออนไลน์ชนิดหนึ่ง",
+                    "D. ชื่อฮาร์ดดิสก์รุ่นใหม่"
+                ],
+                correct: 0
+            },
+            {
+                q: "9. ในการใช้งาน AI เราควรคำนึงถึงเรื่องใดมากที่สุด?",
+                options: [
+                    "A. ความเร็วอินเทอร์เน็ต",
+                    "B. จริยธรรม (Ethics) และการตรวจสอบความถูกต้อง",
+                    "C. ยี่ห้อคอมพิวเตอร์",
+                    "D. สีสันของหน้าจอ"
+                ],
+                correct: 1
+            },
+            {
+                q: "10. AI จะมาแทนที่มนุษย์ทั้งหมดจริงหรือไม่?",
+                options: [
+                    "A. จริง มนุษย์จะไม่เหลืออะไรทำแล้ว",
+                    "B. ไม่จริง AI เป็นเพียงเครื่องมือช่วยทุ่นแรงที่ขาดอารมณ์และความคิดสร้างสรรค์",
+                    "C. จริง เพราะ AI ฉลาดกว่าทุกเรื่อง",
+                    "D. ไม่จริง เพราะ AI ไม่มีไฟฟ้าก็ทำงานไม่ได้"
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const qData = questions[currentQuestion];
+            document.getElementById('question-text').innerText = qData.q;
+            document.getElementById('current-q').innerText = currentQuestion + 1;
+
+            const optionsHtml = qData.options.map((opt, index) =>
+                `<button class="option-btn" onclick="checkAnswer(${index})">${opt}</button>`
+            ).join('');
+
+            document.getElementById('options-area').innerHTML = optionsHtml;
+        }
+
+        function checkAnswer(selectedIndex) {
+            const btns = document.querySelectorAll('.option-btn');
+            const correctIndex = questions[currentQuestion].correct;
+
+            // Disable all buttons related to this question
+            btns.forEach(btn => btn.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                btns[selectedIndex].classList.add('correct');
+                score++;
+                document.getElementById('score').innerText = score;
+            } else {
+                btns[selectedIndex].classList.add('wrong');
+                btns[correctIndex].classList.add('correct'); // Show correct answer
+            }
+
+            // Wait 1.5 seconds then next question
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        function showResult() {
+            document.getElementById('question-area').classList.add('hidden');
+            document.getElementById('quiz-footer').classList.add('hidden');
+            document.getElementById('result-area').classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = `${score} / 10`;
+
+            let msg = "";
+            if (score === 10) msg = "สุดยอด! คุณคือ AI Master 🏆";
+            else if (score >= 7) msg = "เก่งมาก! คุณมีความรู้พื้นฐานแน่นปึก 👏";
+            else msg = "พยายามอีกนิด! ลองกลับไปทบทวนเนื้อหาดูนะ 💪";
+
+            document.getElementById('feedback-msg').innerText = msg;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').innerText = 0;
+            document.getElementById('result-area').classList.add('hidden');
+            document.getElementById('quiz-footer').classList.remove('hidden');
+            document.getElementById('question-area').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // Start
+        loadQuestion();
+    </script>
+</body>
+
+</html>

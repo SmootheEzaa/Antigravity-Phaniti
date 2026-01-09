@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Master Class | AI Gen-Z</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .code-block {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #bef264;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+
+        .code-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            border-bottom-left-radius: 8px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-robot"></i>
+                    AI <span>Gen-Z</span>
+                </a>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="what_is_ai.html">What is AI</a></li>
+                    <li><a href="prompt.html" class="active" style="color: var(--highlight-color);">Prompt
+                            Engineering</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="bg-gradient-mesh"
+            style="top: 20%; left: 30%; background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);">
+        </div>
+        <div class="container hero-content">
+            <span class="hero-tag">Level Up Your Skills</span>
+            <h1>The Art of <br><span class="text-gradient">Prompt Engineering</span></h1>
+            <p class="subtitle">ศาสตร์แห่งการ "สั่ง" ให้ได้ดั่งใจ <br>ปลดล็อกศักยภาพ AI ด้วยคำสั่งที่เหนือชั้น</p>
+        </div>
+    </section>
+
+    <!-- Formula Section -->
+    <section class="fade-in-section" style="padding-top: 0;">
+        <div class="container">
+
+            <div class="section-grid" style="margin-bottom: 5rem;">
+                <div class="card" style="grid-column: span 1 / -1; display: block;">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">🧪 สูตรลับ Prompt ขั้นเทพ</h2>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-user-astronaut"
+                                style="font-size: 2rem; color: #f472b6; margin-bottom: 1rem;"></i>
+                            <h4>1. Persona</h4>
+                            <p style="font-size: 0.9rem;">"Act as a..."<br>บอกให้ AI สวมบทบาทเป็นใคร</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-map"
+                                style="font-size: 2rem; color: #a78bfa; margin-bottom: 1rem;"></i>
+                            <h4>2. Context</h4>
+                            <p style="font-size: 0.9rem;">ข้อมูลพื้นฐาน เป้าหมาย และข้อจำกัด</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-list-check"
+                                style="font-size: 2rem; color: #34d399; margin-bottom: 1rem;"></i>
+                            <h4>3. Task</h4>
+                            <p style="font-size: 0.9rem;">คำสั่งที่ชัดเจน "ทำอะไร"</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-file-invoice"
+                                style="font-size: 2rem; color: #60a5fa; margin-bottom: 1rem;"></i>
+                            <h4>4. Format</h4>
+                            <p style="font-size: 0.9rem;">รูปแบบผลลัพธ์ (ตาราง, ลิสต์, กลอน)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Techniques -->
+            <div class="section-grid">
+                <div>
+                    <h3>🚀 Technique 1: Role Playing</h3>
+                    <p>การกำหนดบทบาทให้ AI จะช่วยให้คำตอบมีความ "ลึก" และ "ตรงประเด็น" มากขึ้น</p>
+                    <div class="code-block">
+                        <span class="code-label">Bad Prompt</span>
+                        "สอนวิชาประวัติศาสตร์เรื่องอยุธยาหน่อย"
+                    </div>
+                    <div class="code-block" style="border-color: #34d399;">
+                        <span class="code-label" style="color:#34d399">Pro Prompt</span>
+                        "Act as a <strong>History Teacher for Grade 9 students</strong>. Explain the fall of Ayutthaya
+                        using simple language and strict timelines. Focus on the main causes."
+                    </div>
+                </div>
+                <div>
+                    <h3>🧠 Technique 2: Chain of Thought</h3>
+                    <p>เมื่อเจอโจทย์ยากๆ ลองสั่งให้ AI "คิดทีละขั้นตอน" จะช่วยลดความผิดพลาดได้</p>
+                    <div class="code-block">
+                        <span class="code-label">Bad Prompt</span>
+                        "ถ้า a=5, b=10, c=a+b*2 คำตอบคือเท่าไหร่?" (AI อาจรีบตอบผิด)
+                    </div>
+                    <div class="code-block" style="border-color: #34d399;">
+                        <span class="code-label" style="color:#34d399">Pro Prompt</span>
+                        "Solve this logic problem. <strong>Think step-by-step</strong> and explain your reasoning for
+                        each calculation before giving the final answer."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ready to use -->
+            <h2 style="margin-top: 5rem; text-align: center; margin-bottom: 2rem;">✨ Prompts แจกฟรีสำหรับนักเรียน</h2>
+            <div class="section-grid">
+                <div class="card">
+                    <h3>📝 สำหรับสรุปบทเรียน</h3>
+                    <p>ใช้เมื่ออ่านหนังสือไม่ทัน!</p>
+                    <div class="code-block" style="font-size: 0.9rem;">
+                        "Summarize this text into 5 key bullet points. Use simple Thai language suitable for a high
+                        school student. [วางเนื้อหาที่นี่]"</div>
+                </div>
+                <div class="card">
+                    <h3>🇬🇧 สำหรับฝึกภาษาอังกฤษ</h3>
+                    <p>คุยเล่นกับฝรั่งทิพย์</p>
+                    <div class="code-block" style="font-size: 0.9rem;">
+                        "I want to practice my English conversation about [Hobbies/Travel]. Please correct my grammar
+                        errors and ask me follow-up questions. Let's start."</div>
+                </div>
+                <div class="card">
+                    <h3>💡 สำหรับหาไอเดียโครงงาน</h3>
+                    <p>ตอนสมองตัน คิดไม่ออก</p>
+                    <div class="code-block" style="font-size: 0.9rem;">
+                        "Give me 10 creative project ideas for my Science class about [topic]. Make them low-cost and
+                        fun."</div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="index.html#prompt" class="btn btn-primary">
+                    <i class="fa-solid fa-arrow-left"></i> กลับไปหน้าหลัก
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <i class="fa-solid fa-robot"></i> AI <span
+                    style="color:var(--highlight-color); margin-left: 5px;">Gen-Z</span>
+            </div>
+            <p>© 2024 Next-Gen AI for Future Leaders. เตรียมพร้อมเด็กไทยสู่ยุคดิจิทัล</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
